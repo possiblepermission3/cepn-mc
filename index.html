@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulación: Conservación de la Energía</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Péndulo de Newton <span>| Conservación de la Energía</span></h1>
+    </header>
+
+    <main class="grid-container">
+        <section class="col left-col">
+            <h2>Ecuaciones del Sistema</h2>
+            <div class="card formula-card">
+                <h3>Energía Potencial (E<sub>p</sub>)</h3>
+                <p class="formula">E<sub>p</sub> = m &times; g &times; h</p>
+                <div class="real-time-val" id="rt-ep">0.00 J</div>
+            </div>
+            <div class="card formula-card">
+                <h3>Energía Cinética (E<sub>c</sub>)</h3>
+                <p class="formula">E<sub>c</sub> = &frac12; &times; m &times; v&sup2;</p>
+                <div class="real-time-val" id="rt-ec">0.00 J</div>
+            </div>
+            <div class="card formula-card">
+                <h3>Energía Mecánica (E<sub>m</sub>)</h3>
+                <p class="formula">E<sub>m</sub> = E<sub>p</sub> + E<sub>c</sub></p>
+                <div class="real-time-val" id="rt-em">0.00 J</div>
+            </div>
+        </section>
+
+        <section class="col center-col">
+            <div class="canvas-container card">
+                <div class="canvas-header">
+                    <div class="indicators">
+                        <span id="ind-max-ep" class="indicator">E<sub>p</sub> Máxima</span>
+                        <span id="ind-max-ec" class="indicator">E<sub>c</sub> Máxima</span>
+                    </div>
+                    <div class="timers">
+                        <span>Tiempo: <span id="display-time">00:00.00</span></span>
+                        <span>Oscilaciones: <span id="display-osc">0</span></span>
+                    </div>
+                </div>
+                <canvas id="simulationCanvas" width="600" height="400"></canvas>
+                
+                <div class="energy-bar-wrapper">
+                    <span class="bar-label">Transferencia de Energía</span>
+                    <div class="energy-bar">
+                        <div id="bar-ep" class="bar-fill ep-fill" style="width: 100%;"></div>
+                        <div id="bar-ec" class="bar-fill ec-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="bar-legends">
+                        <span class="legend-ep">■ Potencial</span>
+                        <span class="legend-ec">■ Cinética</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="col right-col">
+            <h2>Datos en Tiempo Real</h2>
+            <div class="card data-grid">
+                <div class="data-item">
+                    <span class="label">Masa (m)</span>
+                    <span class="value" id="val-mass">1.00 kg</span>
+                    <small>Cantidad de materia de una esfera.</small>
+                </div>
+                <div class="data-item">
+                    <span class="label">Gravedad (g)</span>
+                    <span class="value" id="val-g">9.81 m/s&sup2;</span>
+                    <small>Aceleración del entorno.</small>
+                </div>
+                <div class="data-item">
+                    <span class="label">Altura (h)</span>
+                    <span class="value" id="val-h">0.00 m</span>
+                    <small>Altura actual respecto al reposo.</small>
+                </div>
+                <div class="data-item">
+                    <span class="label">Velocidad (v)</span>
+                    <span class="value" id="val-v">0.00 m/s</span>
+                    <small>Rapidez de la masa en movimiento.</small>
+                </div>
+                <div class="data-item">
+                    <span class="label">Ángulo (&theta;)</span>
+                    <span class="value" id="val-angle">0.00&deg;</span>
+                    <small>Inclinación de la cuerda activa.</small>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="controls-panel">
+        <div class="sliders-container">
+            <div class="control-group">
+                <label>Masa (kg): <input type="number" id="num-mass" value="1" min="0.1" max="10" step="0.1"></label>
+                <input type="range" id="range-mass" value="1" min="0.1" max="10" step="0.1">
+            </div>
+            <div class="control-group">
+                <label>Altura Inicial (m): <input type="number" id="num-h0" value="2" min="0" max="5" step="0.1"></label>
+                <input type="range" id="range-h0" value="2" min="0" max="5" step="0.1">
+            </div>
+            <div class="control-group">
+                <label>Gravedad (m/s&sup2;): <input type="number" id="num-g" value="9.81" min="1" max="20" step="0.01"></label>
+                <input type="range" id="range-g" value="9.81" min="1" max="20" step="0.01">
+            </div>
+            <div class="control-group">
+                <label>Long. Hilo (m): <input type="number" id="num-l" value="5" min="2" max="10" step="0.1"></label>
+                <input type="range" id="range-l" value="5" min="2" max="10" step="0.1">
+            </div>
+        </div>
+        <div class="buttons-container">
+            <button id="btn-play" class="btn primary">Iniciar Simulación</button>
+            <button id="btn-pause" class="btn secondary">Pausar</button>
+            <button id="btn-reset" class="btn danger">Reiniciar</button>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
